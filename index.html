@@ -10,7 +10,7 @@
   <!-- Google Fonts: Orbitron for digital countdown, Outfit for outlined titles, Inter for body -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&family=Orbitron:wght@700;800;900&family=Outfit:wght@800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900&family=Orbitron:wght@700;800;900&family=Outfit:wght@800;900&display=swap" rel="stylesheet">
 
   <style>
     /* -------------------------------------------------------------
@@ -99,7 +99,7 @@
       filter: drop-shadow(0 0 8px var(--med-green)) drop-shadow(0 0 10px var(--med-red));
     }
 
-    /* Varied speeds and counter-rotation for rich organic movement across joints */
+    /* Varied speeds and counter-rotation for rich dynamic movement across joints */
     .collage-tile:nth-child(2n) .joint-shine {
       animation-duration: 4.4s;
       animation-direction: reverse;
@@ -113,18 +113,14 @@
     }
 
     @keyframes rotateJointShine {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     /* Inner photo container */
     .tile-img-box {
       position: absolute;
-      inset: 3px; /* 3px border reveals the running shine along the joint */
+      inset: 3px; /* 3px reveals the moving shine joint border */
       border-radius: 6px;
       overflow: hidden;
       z-index: 3;
@@ -262,8 +258,8 @@
     ------------------------------------------------------------- */
     .logo-wrapper {
       position: relative;
-      width: 140px;
-      height: 140px;
+      width: 135px;
+      height: 135px;
       margin: 0 auto 16px auto;
       display: flex;
       align-items: center;
@@ -333,8 +329,8 @@
     /* Logo image with gentle float + pulse */
     .logo-img {
       position: relative;
-      width: 130px;
-      height: 130px;
+      width: 125px;
+      height: 125px;
       object-fit: contain;
       z-index: 3;
       filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 16px rgba(0, 230, 118, 0.8));
@@ -377,7 +373,7 @@
       gap: 10px;
       margin-bottom: 12px;
       font-family: 'Orbitron', monospace;
-      font-size: clamp(0.85rem, 1.8vw, 1.1rem);
+      font-size: clamp(0.82rem, 1.7vw, 1.05rem);
       font-weight: 800;
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -449,13 +445,13 @@
 
     .maintenance-message {
       font-family: 'Inter', sans-serif;
-      font-size: clamp(0.98rem, 1.8vw, 1.25rem);
+      font-size: clamp(0.96rem, 1.8vw, 1.25rem);
       font-weight: 800;
       line-height: 1.5;
       width: 100%;
       max-width: 680px;
       color: #ffffff;
-      margin: 0 auto 30px auto;
+      margin: 0 auto 28px auto;
       background: transparent !important;
       paint-order: stroke fill;
       -webkit-text-stroke: 2.8px #000000;
@@ -471,7 +467,7 @@
        Orbitron Monospace, zero background, fully responsive
     ------------------------------------------------------------- */
     .countdown-section {
-      margin-bottom: 34px;
+      margin-bottom: 32px;
       width: 100%;
       max-width: 680px;
       background: transparent !important;
@@ -765,32 +761,31 @@
         letter-spacing: 2px;
       }
       .maintenance-message {
-        font-size: 0.95rem;
-        padding: 0 14px;
-        margin-bottom: 22px;
+        font-size: 0.92rem;
+        padding: 0 8px;
+        margin-bottom: 20px;
         word-break: normal;
-        overflow-wrap: normal;
-        hyphens: none;
+        overflow-wrap: break-word;
       }
       .countdown-section {
-        margin-bottom: 24px;
+        margin-bottom: 22px;
       }
       .digital-clock-grid {
-        gap: 3px;
+        gap: 4px;
         width: 100%;
-        max-width: 350px;
+        max-width: 340px;
       }
       .digital-unit-box {
         min-width: 0;
         flex: 1 1 0;
       }
       .digital-number {
-        font-size: clamp(1.45rem, 6.2vw, 2.1rem);
+        font-size: clamp(1.4rem, 6.2vw, 2rem);
         -webkit-text-stroke: 2.2px #000000;
         letter-spacing: 0px;
       }
       .digital-colon {
-        font-size: clamp(1.2rem, 5vw, 1.8rem);
+        font-size: clamp(1.2rem, 5vw, 1.7rem);
         margin-top: 1px;
         -webkit-text-stroke: 2px #000000;
       }
@@ -821,7 +816,7 @@
         display: none;
       }
       .footer-brand {
-        font-size: 0.68rem;
+        font-size: 0.65rem;
         letter-spacing: 1px;
         max-width: 95vw;
         margin: 20px auto 0 auto;
@@ -960,7 +955,7 @@
 
     <!-- Outlined Message -->
     <p class="maintenance-message">
-      We are upgrading our laboratory systems for faster digital reports, direct doctor consultations, and instant appointment booking.
+      We are currently upgrading our digital systems to provide faster online reports, doctor consultations, and automated appointment bookings.
     </p>
 
     <!-- Digital 7-Day Countdown Timer -->
