@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediScan Diagnostic Centre | Under Maintenance</title>
+  <meta name="description" content="MediScan Diagnostic Centre website is currently undergoing scheduled maintenance. Contact us at +91 98326 39488 or rprasun093@gmail.com.">
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <!-- Google Fonts: Orbitron for digital countdown, Outfit for bold outlined titles, Inter for details -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Orbitron:wght@600;700;800;900&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* -------------------------------------------------------------
+       BASE & RESET
+    ------------------------------------------------------------- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --med-green: #00e676;
+      --med-green-glow: rgba(0, 230, 118, 0.85);
+      --med-green-dark: #00a859;
+      --med-red: #ff1744;
+      --med-red-glow: rgba(255, 23, 68, 0.85);
+      --med-white: #ffffff;
+      --med-black: #000000;
+      --joint-gap: 5px;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #050b0e;
+      color: #ffffff;
+    }
+
+    /* -------------------------------------------------------------
+       COLLAGE BACKGROUND (FULL VIEWPORT)
+       No dark overlay color used. Images are completely visible.
+    ------------------------------------------------------------- */
+    .collage-viewport {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: var(--joint-gap);
+      padding: var(--joint-gap);
+      background: #020608;
+      z-index: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Individual collage tile with moving shine joint border */
+    .collage-tile {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+    }
+
+    /* Tile 8: Tall portrait storefront image spans 2 rows for seamless 11-tile layout */
+    .tile-portrait-span {
+      grid-row: 2 / span 2;
+      grid-column: 2;
+    }
+
+    /* Running shine effect on all joints/borders */
+    .joint-shine {
+      position: absolute;
+      inset: -150%;
+      background: conic-gradient(
+        from 0deg at 50% 50%,
+        transparent 0%,
+        var(--med-green) 18%,
+        #ffffff 22%,
+        var(--med-red) 26%,
+        transparent 35%,
+        transparent 50%,
+        var(--med-green) 68%,
+        #ffffff 72%,
+        var(--med-red) 76%,
+        transparent 85%
+      );
+      animation: rotateJointShine 6s linear infinite;
+      z-index: 2;
+      pointer-events: none;
+      filter: drop-shadow(0 0 8px var(--med-green)) drop-shadow(0 0 10px var(--med-red));
+    }
+
+    /* Varied rotation speeds for lively dynamic movement across tiles */
+    .collage-tile:nth-child(2n) .joint-shine {
+      animation-duration: 4.8s;
+      animation-direction: reverse;
+    }
+    .collage-tile:nth-child(3n) .joint-shine {
+      animation-duration: 5.5s;
+    }
+    .collage-tile:nth-child(5n) .joint-shine {
+      animation-duration: 4.2s;
+      animation-direction: reverse;
+    }
+
+    @keyframes rotateJointShine {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Inner tile containing the actual raw photo */
+    .tile-img-box {
+      position: absolute;
+      inset: 3px; /* border thickness displaying the moving shine */
+      border-radius: 6px;
+      overflow: hidden;
+      z-index: 3;
+    }
+
+    .tile-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    /* -------------------------------------------------------------
+       TRAVELLING LASER SHINE BEAMS ACROSS GRID JOINTS
+       Continuous flowing light along horizontal and vertical seams
+    ------------------------------------------------------------- */
+    .joint-beam-horizontal {
+      position: fixed;
+      left: 0;
+      right: 0;
+      height: 4px;
+      z-index: 4;
+      pointer-events: none;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(0, 230, 118, 0) 10%, 
+        var(--med-green) 45%, 
+        #ffffff 50%, 
+        var(--med-red) 55%, 
+        rgba(255, 23, 68, 0) 90%, 
+        transparent 100%
+      );
+      background-size: 35% 100%;
+      background-repeat: no-repeat;
+      filter: drop-shadow(0 0 8px var(--med-green)) drop-shadow(0 0 12px var(--med-red));
+    }
+
+    .beam-h-1 {
+      top: calc(33.333vh - 2px);
+      animation: sweepH1 4.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    .beam-h-2 {
+      top: calc(66.666vh - 2px);
+      animation: sweepH2 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes sweepH1 {
+      0% {
+        background-position: -40vw 0;
+      }
+      100% {
+        background-position: 140vw 0;
+      }
+    }
+
+    @keyframes sweepH2 {
+      0% {
+        background-position: 140vw 0;
+      }
+      100% {
+        background-position: -40vw 0;
+      }
+    }
+
+    .joint-beam-vertical {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      z-index: 4;
+      pointer-events: none;
+      background: linear-gradient(180deg, 
+        transparent 0%, 
+        rgba(255, 23, 68, 0) 10%, 
+        var(--med-red) 45%, 
+        #ffffff 50%, 
+        var(--med-green) 55%, 
+        rgba(0, 230, 118, 0) 90%, 
+        transparent 100%
+      );
+      background-size: 100% 35%;
+      background-repeat: no-repeat;
+      filter: drop-shadow(0 0 8px var(--med-red)) drop-shadow(0 0 12px var(--med-green));
+    }
+
+    .beam-v-1 {
+      left: calc(25vw - 2px);
+      animation: sweepV1 4.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      animation-delay: 0.8s;
+    }
+
+    .beam-v-2 {
+      left: calc(50vw - 2px);
+      animation: sweepV2 5.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      animation-delay: 2.2s;
+    }
+
+    .beam-v-3 {
+      left: calc(75vw - 2px);
+      animation: sweepV3 4.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      animation-delay: 1.2s;
+    }
+
+    @keyframes sweepV1 {
+      0% {
+        background-position: 0 -40vh;
+      }
+      100% {
+        background-position: 0 140vh;
+      }
+    }
+
+    @keyframes sweepV2 {
+      0% {
+        background-position: 0 140vh;
+      }
+      100% {
+        background-position: 0 -40vh;
+      }
+    }
+
+    @keyframes sweepV3 {
+      0% {
+        background-position: 0 -40vh;
+      }
+      100% {
+        background-position: 0 140vh;
+      }
+    }
+
+    /* -------------------------------------------------------------
+       FOREGROUND CONTENT CONTAINER
+       CRITICAL: NO BACKGROUND OVERLAY OR RECTANGLE BOXES.
+       Direct transparent overlay with outlined, high-visibility text.
+    ------------------------------------------------------------- */
+    .content-overlay {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+      text-align: center;
+      background: transparent; /* Strictly no background */
+      pointer-events: auto;
+    }
+
+    /* -------------------------------------------------------------
+       ANIMATED LOGO
+       Page load entrance + continuous heartbeat radar & floating aura
+    ------------------------------------------------------------- */
+    .logo-wrapper {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 20px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: logoEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Medical Heartbeat Radar Waves radiating outward from logo */
+    .radar-pulse {
+      position: absolute;
+      inset: -15px;
+      border-radius: 50%;
+      border: 3px solid var(--med-green);
+      box-shadow: 0 0 20px var(--med-green-glow);
+      pointer-events: none;
+      animation: heartbeatPulse 2.6s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+      z-index: 1;
+    }
+
+    .radar-pulse-2 {
+      position: absolute;
+      inset: -15px;
+      border-radius: 50%;
+      border: 3px solid var(--med-red);
+      box-shadow: 0 0 20px var(--med-red-glow);
+      pointer-events: none;
+      animation: heartbeatPulse 2.6s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+      animation-delay: 1.3s;
+      z-index: 1;
+    }
+
+    @keyframes heartbeatPulse {
+      0% {
+        transform: scale(0.85);
+        opacity: 0.95;
+      }
+      60% {
+        transform: scale(1.45);
+        opacity: 0.15;
+      }
+      100% {
+        transform: scale(1.65);
+        opacity: 0;
+      }
+    }
+
+    /* Continuous animated aura ring */
+    .logo-aura-ring {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      padding: 4px;
+      background: conic-gradient(
+        from 0deg,
+        var(--med-green),
+        #ffffff,
+        var(--med-red),
+        var(--med-green)
+      );
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+      mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+      animation: rotateJointShine 4s linear infinite;
+      filter: drop-shadow(0 0 10px var(--med-green)) drop-shadow(0 0 15px var(--med-red));
+      z-index: 2;
+    }
+
+    /* The logo image itself with continuous 3D float + medical pulse */
+    .logo-img {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      object-fit: contain;
+      z-index: 3;
+      filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 15px rgba(0, 230, 118, 0.7));
+      animation: logoFloatPulse 3.2s ease-in-out infinite;
+      border-radius: 50%;
+    }
+
+    @keyframes logoEntrance {
+      0% {
+        opacity: 0;
+        transform: scale(0.25) rotate(-15deg);
+      }
+      70% {
+        transform: scale(1.12) rotate(4deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    @keyframes logoFloatPulse {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+        filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 15px rgba(0, 230, 118, 0.7));
+      }
+      50% {
+        transform: translateY(-8px) scale(1.04);
+        filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 25px rgba(255, 23, 68, 0.8));
+      }
+    }
+
+    /* -------------------------------------------------------------
+       OUTLINED TEXT - HIGH VISIBILITY WITH ZERO BACKGROUND
+       Dual -webkit-text-stroke + solid multi-directional drop shadows
+    ------------------------------------------------------------- */
+    .badge-maintenance {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(0.85rem, 1.8vw, 1.15rem);
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #ff1744;
+      background: transparent; /* No background */
+      -webkit-text-stroke: 1.2px #000000;
+      text-shadow:
+        -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
+        -3px  0   0 #000, 3px  0   0 #000,  0  -3px 0 #000, 0   3px 0 #000,
+        0 0 16px rgba(255, 23, 68, 0.9),
+        0 4px 14px #000000;
+    }
+
+    .badge-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--med-red);
+      box-shadow: 0 0 12px var(--med-red), 0 0 20px var(--med-red);
+      border: 2px solid #000;
+      animation: blinkDot 1s infinite alternate;
+      display: inline-block;
+    }
+
+    @keyframes blinkDot {
+      0% { opacity: 0.3; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1.25); }
+    }
+
+    .site-heading {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.2rem, 5.8vw, 4.2rem);
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #ffffff;
+      margin-bottom: 6px;
+      background: transparent;
+      -webkit-text-stroke: 1.8px #000000;
+      text-shadow:
+        -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000,
+        -4px  0   0 #000, 4px  0   0 #000,  0  -4px 0 #000, 0   4px 0 #000,
+        0 0 20px var(--med-green-glow),
+        0 0 35px var(--med-green-glow),
+        0 8px 30px rgba(0, 0, 0, 0.98);
+    }
+
+    .site-subheading {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.4rem, 3.5vw, 2.5rem);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--med-green);
+      margin-bottom: 16px;
+      background: transparent;
+      -webkit-text-stroke: 1.4px #000000;
+      text-shadow:
+        -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
+        -3px  0   0 #000, 3px  0   0 #000,  0  -3px 0 #000, 0   3px 0 #000,
+        0 0 20px var(--med-green-glow),
+        0 6px 20px #000000;
+    }
+
+    .maintenance-message {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      font-weight: 700;
+      line-height: 1.5;
+      max-width: 720px;
+      color: #ffffff;
+      margin: 0 auto 34px auto;
+      background: transparent;
+      -webkit-text-stroke: 1px #000000;
+      text-shadow:
+        -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
+        -3px  0   0 #000, 3px  0   0 #000,  0  -3px 0 #000, 0   3px 0 #000,
+        0 0 12px rgba(255, 255, 255, 0.5),
+        0 4px 16px rgba(0, 0, 0, 0.98);
+    }
+
+    /* -------------------------------------------------------------
+       DIGITAL COUNTDOWN TIMER (7 DAYS - AUTO REDUCING)
+       Digital LCD / HUD aesthetic with pure outline visibility
+    ------------------------------------------------------------- */
+    .countdown-section {
+      margin-bottom: 40px;
+      background: transparent;
+    }
+
+    .countdown-title {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(0.85rem, 1.6vw, 1.1rem);
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--med-green);
+      margin-bottom: 18px;
+      background: transparent;
+      -webkit-text-stroke: 1px #000000;
+      text-shadow:
+        -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
+        0 0 15px var(--med-green-glow),
+        0 4px 12px #000000;
+    }
+
+    .digital-clock-grid {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(10px, 2.5vw, 24px);
+      background: transparent;
+    }
+
+    .digital-unit-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: clamp(70px, 14vw, 120px);
+      background: transparent; /* No background */
+    }
+
+    .digital-number {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(3rem, 7.5vw, 5.2rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: 2px;
+      color: #ffffff;
+      background: transparent;
+      -webkit-text-stroke: 2px #000000;
+      text-shadow:
+        -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000,
+        -4px  0   0 #000, 4px  0   0 #000,  0  -4px 0 #000, 0   4px 0 #000,
+        0 0 25px var(--med-green-glow),
+        0 0 45px var(--med-green-glow),
+        0 8px 30px #000000;
+    }
+
+    .digital-colon {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      font-weight: 900;
+      line-height: 0.95;
+      color: var(--med-red);
+      background: transparent;
+      -webkit-text-stroke: 1.8px #000000;
+      text-shadow:
+        -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
+        0 0 20px var(--med-red-glow),
+        0 6px 18px #000000;
+      animation: blinkDigitalColon 1s steps(1) infinite;
+      align-self: flex-start;
+      margin-top: 5px;
+    }
+
+    @keyframes blinkDigitalColon {
+      0%, 49% {
+        opacity: 1;
+      }
+      50%, 100% {
+        opacity: 0.2;
+      }
+    }
+
+    .digital-unit-label {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(0.7rem, 1.4vw, 0.95rem);
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--med-green);
+      margin-top: 10px;
+      background: transparent;
+      -webkit-text-stroke: 0.8px #000000;
+      text-shadow:
+        -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000,
+        0 0 10px var(--med-green-glow),
+        0 3px 10px #000000;
+    }
+
+    /* -------------------------------------------------------------
+       CONTACT DETAILS & ACTIONS
+       Outlined neon style with direct interactive click links
+    ------------------------------------------------------------- */
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 25px;
+      background: transparent;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 26px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+      color: #ffffff;
+      background: transparent; /* No background card */
+      position: relative;
+      -webkit-text-stroke: 0.8px #000000;
+      text-shadow:
+        -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
+        0 0 12px var(--med-green-glow),
+        0 4px 12px #000000;
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.3s ease;
+      cursor: pointer;
+    }
+
+    /* Glowing neon outline border */
+    .contact-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50px;
+      border: 2.5px solid var(--med-green);
+      box-shadow: 0 0 15px var(--med-green-glow), inset 0 0 10px rgba(0, 230, 118, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-4px) scale(1.03);
+      filter: brightness(1.2);
+    }
+
+    .contact-btn:hover::before {
+      border-color: #ffffff;
+      box-shadow: 0 0 25px var(--med-green), 0 0 35px var(--med-green-glow), inset 0 0 15px var(--med-green);
+    }
+
+    /* Email button with medical red theme */
+    .contact-btn.btn-email::before {
+      border-color: var(--med-red);
+      box-shadow: 0 0 15px var(--med-red-glow), inset 0 0 10px rgba(255, 23, 68, 0.25);
+    }
+
+    .contact-btn.btn-email {
+      text-shadow:
+        -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
+        0 0 12px var(--med-red-glow),
+        0 4px 12px #000000;
+    }
+
+    .contact-btn.btn-email:hover::before {
+      border-color: #ffffff;
+      box-shadow: 0 0 25px var(--med-red), 0 0 35px var(--med-red-glow), inset 0 0 15px var(--med-red);
+    }
+
+    /* WhatsApp quick action */
+    .contact-btn.btn-whatsapp::before {
+      border-color: #25D366;
+      box-shadow: 0 0 15px rgba(37, 211, 102, 0.7), inset 0 0 10px rgba(37, 211, 102, 0.25);
+    }
+
+    .contact-btn.btn-whatsapp:hover::before {
+      border-color: #ffffff;
+      box-shadow: 0 0 25px #25D366, 0 0 35px rgba(37, 211, 102, 0.9);
+    }
+
+    .btn-icon {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+      filter: drop-shadow(0 2px 4px #000);
+      flex-shrink: 0;
+    }
+
+    /* Direct Contact Line underneath */
+    .direct-contacts-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+      font-weight: 800;
+      color: #ffffff;
+      background: transparent;
+      -webkit-text-stroke: 0.8px #000000;
+      text-shadow:
+        -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
+        0 0 12px rgba(0, 230, 118, 0.7),
+        0 4px 12px #000000;
+    }
+
+    .contact-inline-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contact-inline-item a {
+      color: #ffffff;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .contact-inline-item a:hover {
+      color: var(--med-green);
+    }
+
+    .contact-separator {
+      color: var(--med-red);
+      font-weight: 900;
+      text-shadow: 0 0 8px var(--med-red-glow);
+    }
+
+    /* Footer domain branding */
+    .footer-brand {
+      margin-top: 30px;
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+      letter-spacing: 3px;
+      color: rgba(255, 255, 255, 0.9);
+      background: transparent;
+      -webkit-text-stroke: 0.6px #000000;
+      text-shadow:
+        -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000,
+        0 0 10px rgba(0, 230, 118, 0.5),
+        0 2px 8px #000000;
+    }
+
+    /* -------------------------------------------------------------
+       RESPONSIVE BREAKPOINTS
+    ------------------------------------------------------------- */
+    @media (max-width: 992px) {
+      .collage-viewport {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+      }
+      .tile-portrait-span {
+        grid-row: 2 / span 2;
+        grid-column: 2;
+      }
+      .beam-v-3 {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .collage-viewport {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+      }
+      .tile-portrait-span {
+        grid-row: auto;
+        grid-column: auto;
+      }
+      .digital-clock-grid {
+        gap: 8px;
+      }
+      .digital-unit-box {
+        min-width: 60px;
+      }
+      .digital-colon {
+        font-size: 2rem;
+      }
+      .contact-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      .contact-btn {
+        width: 90%;
+        justify-content: center;
+      }
+      .direct-contacts-row {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .contact-separator {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =============================================================
+       BACKGROUND COLLAGE: ALL 11 IMAGES FROM UPLOADS FOLDER
+       No dark overlay color used. Images are visible in full vibrance.
+  ============================================================== -->
+  <div class="collage-viewport" aria-hidden="true">
+
+    <!-- Tile 1 -->
+    <div class="collage-tile">
+      <div class="joint-shine"></div>
+      <div class="tile-img-box">
+        <img src="uploads/WhatsApp Image 2026-09-09 at 1.02.44 PM.jpeg" alt="MediScan Diagnostic Equipment" loading="eager">
+      </div>
+    </div>
+
+    <!-- Tile 2 -->
+    <div class="collage-tile">
+      <div class="joint-shine"></div>
+      <div class="tile-img-box">
+        <img src="uploads/WhatsApp Image 2026-09-09 at 12.58.58 PM (1).jpeg" alt="MediScan Lab Technician Testing" loading="eager">
+      </div>
+    </div>
+
+    <!-- Tile 3 -->
+    <div class="collage-tile">
+      <div class="joint-shine"></div>
+      <div class="tile-img-box">
+        <img src="uploads/WhatsApp Image 2026-09-09 at 12.58.58 PM.jpeg" alt="MediScan Laboratory Workspace" loading="eager">
+      </div>
+    </div>
+
+    <!-- Tile 4 -->
+    <div class="collage-tile">
+      <div class="joint-shine"></div>
+      <div class="tile-img-box">
+        <img src="uploads/WhatsApp Image 2026-09-09 at 12.58.59 PM (1).jpeg" alt="MediScan Pathology Analyzer" loading="eager">
+      </div>
+    </div>
+
+    <!-- Tile 5 -->
+    <div class="collage-tile">
+      <div class="joint-shine"></div>
+      <div class="tile-img-box">
+        <img src="uploads/WhatsApp Image 2026-09-09 at 12.58.59 PM (2).jpeg" alt="MediScan Computerized Diagnostics" loading="eager">
+      </div>
+    </div>
+
+    <!-- Tile 8 (PORTRAIT STORE FRONT) - Spans 2 rows for seamless 11-tile collage -->
+    <div class="collage-tile tile-portrait-span">
+      <div class="joint-shine"></div>
+      <div class="tile-img-box">
+        <img src="uploads/WhatsApp Image 2026-09-09 at 12.59.00 PM.jpeg" alt="MediScan Diagnostic Centre Storefront" loading="eager">
+      </div>
+    </div>
+
+    <!-- Tile 6 -->
+    <div class="collage-tile">
+      <div class="joint-shine"></div>
+      <div class="tile-img-box">
+        <img src="uploads/WhatsApp Image 2026-09-09 at 12.58.59 PM.jpeg" alt="MediScan Centrifuge & Testing Unit" loading="eager">
+      </div>
+    </div>
+
+    <!-- Tile 7 -->
+    <div class="collage-tile">
+      <div class="joint-shine"></div>
+      <div class="tile-img-box">
+        <img src="uploads/WhatsApp Image 2026-09-09 at 12.59.00 PM (1).jpeg" alt="MediScan Sample Processing" loading="eager">
+      </div>
+    </div>
+
+    <!-- Tile 9 -->
+    <div class="collage-tile">
+      <div class="joint-shine"></div>
+      <div class="tile-img-box">
+        <img src="uploads/WhatsApp Image 2026-09-09 at 12.59.01 PM.jpeg" alt="MediScan Diagnostic Patient Reception" loading="eager">
+      </div>
+    </div>
+
+    <!-- Tile 10 -->
+    <div class="collage-tile">
+      <div class="joint-shine"></div>
+      <div class="tile-img-box">
+        <img src="uploads/WhatsApp Image 2026-09-09 at 12.59.03 PM.jpeg" alt="MediScan Automated Testing System" loading="eager">
+      </div>
+    </div>
+
+    <!-- Tile 11 -->
+    <div class="collage-tile">
+      <div class="joint-shine"></div>
+      <div class="tile-img-box">
+        <img src="uploads/WhatsApp Image 2026-09-09 at 12.59.29 PM.jpeg" alt="MediScan Laboratory Specialist Desk" loading="eager">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Continuous Travelling Laser Beams along Grid Joints -->
+  <div class="joint-beam-horizontal beam-h-1" aria-hidden="true"></div>
+  <div class="joint-beam-horizontal beam-h-2" aria-hidden="true"></div>
+  <div class="joint-beam-vertical beam-v-1" aria-hidden="true"></div>
+  <div class="joint-beam-vertical beam-v-2" aria-hidden="true"></div>
+  <div class="joint-beam-vertical beam-v-3" aria-hidden="true"></div>
+
+  <!-- =============================================================
+       FOREGROUND CONTENT: ZERO BACKGROUND OVERLAY
+       All text uses high-visibility outlines and neon brand glow
+  ============================================================== -->
+  <main class="content-overlay">
+
+    <!-- Brand Logo with Entrance & All-Time Animation -->
+    <div class="logo-wrapper">
+      <div class="radar-pulse"></div>
+      <div class="radar-pulse-2"></div>
+      <div class="logo-aura-ring"></div>
+      <img src="logo.png" alt="MediScan Diagnostic Centre Logo" class="logo-img">
+    </div>
+
+    <!-- Maintenance Status Badge -->
+    <div class="badge-maintenance">
+      <span class="badge-dot"></span>
+      <span>System Upgrade In Progress</span>
+    </div>
+
+    <!-- Outlined Headings (No Background) -->
+    <h1 class="site-heading">MEDISCAN</h1>
+    <h2 class="site-subheading">DIAGNOSTIC CENTRE</h2>
+
+    <!-- Outlined Message -->
+    <p class="maintenance-message">
+      We are currently upgrading our digital laboratory portal to bring you faster online test reports, direct doctor consultations, and automated appointment booking.
+    </p>
+
+    <!-- Digital 7-Day Countdown Timer -->
+    <div class="countdown-section">
+      <div class="countdown-title">Digital Launch Countdown</div>
+      <div class="digital-clock-grid" id="countdownClock">
+        
+        <!-- Days -->
+        <div class="digital-unit-box">
+          <span class="digital-number" id="countDays">07</span>
+          <span class="digital-unit-label">Days</span>
+        </div>
+
+        <div class="digital-colon">:</div>
+
+        <!-- Hours -->
+        <div class="digital-unit-box">
+          <span class="digital-number" id="countHours">00</span>
+          <span class="digital-unit-label">Hours</span>
+        </div>
+
+        <div class="digital-colon">:</div>
+
+        <!-- Minutes -->
+        <div class="digital-unit-box">
+          <span class="digital-number" id="countMinutes">00</span>
+          <span class="digital-unit-label">Mins</span>
+        </div>
+
+        <div class="digital-colon">:</div>
+
+        <!-- Seconds -->
+        <div class="digital-unit-box">
+          <span class="digital-number" id="countSeconds">00</span>
+          <span class="digital-unit-label">Secs</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Contact Details & Direct Actions (No Background Boxes) -->
+    <div class="contact-actions">
+      <!-- Call Button -->
+      <a href="tel:+919832639488" class="contact-btn btn-call" title="Call MediScan Diagnostic Centre">
+        <svg class="btn-icon" viewBox="0 0 24 24">
+          <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+        </svg>
+        <span>Call: +91 98326 39488</span>
+      </a>
+
+      <!-- WhatsApp Quick Action -->
+      <a href="https://wa.me/919832639488?text=Hello%20MediScan%20Diagnostic%20Centre,%20I%20need%20information%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="contact-btn btn-whatsapp" title="WhatsApp MediScan Diagnostic">
+        <svg class="btn-icon" viewBox="0 0 24 24">
+          <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 012.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.42 0-2.82-.37-4.06-1.07l-.29-.17-3.02.79.81-2.94-.19-.3a8.217 8.217 0 01-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.19.53-.98 1.02-1.39 1.06-.41.05-.93.07-2.67-.65-1.92-.79-3.21-2.73-3.3-2.86-.1-.13-.78-1.04-.78-1.99 0-.95.49-1.42.66-1.61.18-.19.39-.24.52-.24.13 0 .26 0 .37.01.12.01.27-.04.42.33.15.37.52 1.26.56 1.35.05.1.08.21.01.33-.06.13-.1.21-.19.32-.1.11-.21.24-.3.32-.1.1-.21.21-.09.42.12.21.54.89 1.15 1.44.79.7 1.45.92 1.66 1.02.21.1.33.09.45-.05.13-.14.54-.63.68-.85.15-.22.29-.18.49-.11.2.07 1.26.6 1.47.7.22.11.36.16.41.25.06.09.06.52-.13 1.05z"/>
+        </svg>
+        <span>WhatsApp Us</span>
+      </a>
+
+      <!-- Email Button -->
+      <a href="mailto:rprasun093@gmail.com" class="contact-btn btn-email" title="Email MediScan Diagnostic Centre">
+        <svg class="btn-icon" viewBox="0 0 24 24">
+          <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+        <span>Email: rprasun093@gmail.com</span>
+      </a>
+    </div>
+
+    <!-- Direct Contact Line -->
+    <div class="direct-contacts-row">
+      <span class="contact-inline-item">
+        📞 <a href="tel:+919832639488">+91 98326 39488</a>
+      </span>
+      <span class="contact-separator">✦</span>
+      <span class="contact-inline-item">
+        ✉️ <a href="mailto:rprasun093@gmail.com">rprasun093@gmail.com</a>
+      </span>
+    </div>
+
+    <!-- Domain Branding Footer -->
+    <footer class="footer-brand">
+      MEDISCANDIAGNOSTIC.CO.IN &copy; ALL RIGHTS RESERVED
+    </footer>
+
+  </main>
+
+  <!-- =============================================================
+       AUTOMATIC 7-DAY DIGITAL COUNTDOWN SCRIPT
+       Reduces automatically every second. Persisted across page refreshes.
+  ============================================================== -->
+  <script>
+    (function () {
+      const STORAGE_KEY = 'mediscan_maintenance_target_epoch';
+      const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+
+      // Check existing target or initialize 7 days from now
+      let targetEpoch = localStorage.getItem(STORAGE_KEY);
+      const now = Date.now();
+
+      if (!targetEpoch || isNaN(targetEpoch) || parseInt(targetEpoch, 10) <= now) {
+        targetEpoch = now + SEVEN_DAYS_MS;
+        localStorage.setItem(STORAGE_KEY, targetEpoch);
+      } else {
+        targetEpoch = parseInt(targetEpoch, 10);
+      }
+
+      const elDays = document.getElementById('countDays');
+      const elHours = document.getElementById('countHours');
+      const elMinutes = document.getElementById('countMinutes');
+      const elSeconds = document.getElementById('countSeconds');
+
+      function padZero(num) {
+        return num < 10 ? '0' + num : '' + num;
+      }
+
+      function updateCountdown() {
+        const currentTime = Date.now();
+        const diff = Math.max(0, targetEpoch - currentTime);
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        elDays.textContent = padZero(days);
+        elHours.textContent = padZero(hours);
+        elMinutes.textContent = padZero(minutes);
+        elSeconds.textContent = padZero(seconds);
+
+        // If timer expires, reset to a fresh cycle or hold at 00:00:00:00
+        if (diff <= 0) {
+          targetEpoch = Date.now() + SEVEN_DAYS_MS;
+          localStorage.setItem(STORAGE_KEY, targetEpoch);
+        }
+      }
+
+      // Initial update
+      updateCountdown();
+
+      // Tick every second
+      setInterval(updateCountdown, 1000);
+    })();
+  </script>
+</body>
+</html>
