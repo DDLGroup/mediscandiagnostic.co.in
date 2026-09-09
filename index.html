@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>MediScan Diagnostic Centre | Under Maintenance</title>
-  <meta name="description" content="MediScan Diagnostic Centre website is currently undergoing scheduled maintenance. Contact us at +91 98326 39488 or rprasun093@gmail.com.">
+  <meta name="description" content="MediScan Diagnostic Centre website is undergoing scheduled maintenance. Call +91 98326 39488 or email rprasun093@gmail.com.">
   <link rel="icon" type="image/png" href="logo.png">
 
-  <!-- Google Fonts: Orbitron for digital countdown, Outfit for bold outlined titles, Inter for details -->
+  <!-- Google Fonts: Orbitron for digital countdown, Outfit for outlined titles, Inter for body -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Orbitron:wght@600;700;800;900&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&family=Orbitron:wght@700;800;900&family=Outfit:wght@800;900&display=swap" rel="stylesheet">
 
   <style>
     /* -------------------------------------------------------------
@@ -24,28 +24,27 @@
 
     :root {
       --med-green: #00e676;
-      --med-green-glow: rgba(0, 230, 118, 0.85);
+      --med-green-glow: rgba(0, 230, 118, 0.9);
       --med-green-dark: #00a859;
       --med-red: #ff1744;
-      --med-red-glow: rgba(255, 23, 68, 0.85);
+      --med-red-glow: rgba(255, 23, 68, 0.9);
       --med-white: #ffffff;
       --med-black: #000000;
-      --joint-gap: 5px;
+      --joint-gap: 6px;
     }
 
     html, body {
       width: 100%;
-      height: 100%;
+      min-height: 100%;
       overflow-x: hidden;
-      overflow-y: auto;
       font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: #050b0e;
+      background-color: #030708;
       color: #ffffff;
     }
 
     /* -------------------------------------------------------------
        COLLAGE BACKGROUND (FULL VIEWPORT)
-       No dark overlay color used. Images are completely visible.
+       NO OVERLAY COLOR: Pure raw photos from uploads/ visible in full vibrance
     ------------------------------------------------------------- */
     .collage-viewport {
       position: fixed;
@@ -57,7 +56,7 @@
       grid-template-rows: repeat(3, 1fr);
       gap: var(--joint-gap);
       padding: var(--joint-gap);
-      background: #020608;
+      background: #010405;
       z-index: 1;
       pointer-events: none;
       user-select: none;
@@ -71,13 +70,13 @@
       display: flex;
     }
 
-    /* Tile 8: Tall portrait storefront image spans 2 rows for seamless 11-tile layout */
+    /* Tile 8: Tall portrait storefront image spans 2 rows for perfect 11-tile collage */
     .tile-portrait-span {
       grid-row: 2 / span 2;
       grid-column: 2;
     }
 
-    /* Running shine effect on all joints/borders */
+    /* Running shine effect along all joints/edges that keeps moving continuously */
     .joint-shine {
       position: absolute;
       inset: -150%;
@@ -87,29 +86,29 @@
         var(--med-green) 18%,
         #ffffff 22%,
         var(--med-red) 26%,
-        transparent 35%,
+        transparent 36%,
         transparent 50%,
         var(--med-green) 68%,
         #ffffff 72%,
         var(--med-red) 76%,
-        transparent 85%
+        transparent 86%
       );
-      animation: rotateJointShine 6s linear infinite;
+      animation: rotateJointShine 5.5s linear infinite;
       z-index: 2;
       pointer-events: none;
       filter: drop-shadow(0 0 8px var(--med-green)) drop-shadow(0 0 10px var(--med-red));
     }
 
-    /* Varied rotation speeds for lively dynamic movement across tiles */
+    /* Varied speeds and counter-rotation for rich organic movement across joints */
     .collage-tile:nth-child(2n) .joint-shine {
-      animation-duration: 4.8s;
+      animation-duration: 4.4s;
       animation-direction: reverse;
     }
     .collage-tile:nth-child(3n) .joint-shine {
-      animation-duration: 5.5s;
+      animation-duration: 6s;
     }
     .collage-tile:nth-child(5n) .joint-shine {
-      animation-duration: 4.2s;
+      animation-duration: 3.8s;
       animation-direction: reverse;
     }
 
@@ -122,10 +121,10 @@
       }
     }
 
-    /* Inner tile containing the actual raw photo */
+    /* Inner photo container */
     .tile-img-box {
       position: absolute;
-      inset: 3px; /* border thickness displaying the moving shine */
+      inset: 3px; /* 3px border reveals the running shine along the joint */
       border-radius: 6px;
       overflow: hidden;
       z-index: 3;
@@ -137,7 +136,6 @@
       object-fit: cover;
       object-position: center;
       display: block;
-      transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
     /* -------------------------------------------------------------
@@ -177,21 +175,13 @@
     }
 
     @keyframes sweepH1 {
-      0% {
-        background-position: -40vw 0;
-      }
-      100% {
-        background-position: 140vw 0;
-      }
+      0% { background-position: -40vw 0; }
+      100% { background-position: 140vw 0; }
     }
 
     @keyframes sweepH2 {
-      0% {
-        background-position: 140vw 0;
-      }
-      100% {
-        background-position: -40vw 0;
-      }
+      0% { background-position: 140vw 0; }
+      100% { background-position: -40vw 0; }
     }
 
     .joint-beam-vertical {
@@ -234,36 +224,23 @@
     }
 
     @keyframes sweepV1 {
-      0% {
-        background-position: 0 -40vh;
-      }
-      100% {
-        background-position: 0 140vh;
-      }
+      0% { background-position: 0 -40vh; }
+      100% { background-position: 0 140vh; }
     }
 
     @keyframes sweepV2 {
-      0% {
-        background-position: 0 140vh;
-      }
-      100% {
-        background-position: 0 -40vh;
-      }
+      0% { background-position: 0 140vh; }
+      100% { background-position: 0 -40vh; }
     }
 
     @keyframes sweepV3 {
-      0% {
-        background-position: 0 -40vh;
-      }
-      100% {
-        background-position: 0 140vh;
-      }
+      0% { background-position: 0 -40vh; }
+      100% { background-position: 0 140vh; }
     }
 
     /* -------------------------------------------------------------
-       FOREGROUND CONTENT CONTAINER
-       CRITICAL: NO BACKGROUND OVERLAY OR RECTANGLE BOXES.
-       Direct transparent overlay with outlined, high-visibility text.
+       FOREGROUND CONTENT: ZERO BACKGROUND OVERLAY
+       Pure outlined typography with high-contrast strokes & glows
     ------------------------------------------------------------- */
     .content-overlay {
       position: relative;
@@ -273,9 +250,9 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 30px 20px;
+      padding: 30px 16px;
       text-align: center;
-      background: transparent; /* Strictly no background */
+      background: transparent !important;
       pointer-events: auto;
     }
 
@@ -287,17 +264,17 @@
       position: relative;
       width: 140px;
       height: 140px;
-      margin: 0 auto 20px auto;
+      margin: 0 auto 16px auto;
       display: flex;
       align-items: center;
       justify-content: center;
       animation: logoEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
-    /* Medical Heartbeat Radar Waves radiating outward from logo */
+    /* Medical Heartbeat Radar Waves */
     .radar-pulse {
       position: absolute;
-      inset: -15px;
+      inset: -14px;
       border-radius: 50%;
       border: 3px solid var(--med-green);
       box-shadow: 0 0 20px var(--med-green-glow);
@@ -308,7 +285,7 @@
 
     .radar-pulse-2 {
       position: absolute;
-      inset: -15px;
+      inset: -14px;
       border-radius: 50%;
       border: 3px solid var(--med-red);
       box-shadow: 0 0 20px var(--med-red-glow);
@@ -324,11 +301,11 @@
         opacity: 0.95;
       }
       60% {
-        transform: scale(1.45);
+        transform: scale(1.42);
         opacity: 0.15;
       }
       100% {
-        transform: scale(1.65);
+        transform: scale(1.6);
         opacity: 0;
       }
     }
@@ -336,7 +313,7 @@
     /* Continuous animated aura ring */
     .logo-aura-ring {
       position: absolute;
-      inset: -6px;
+      inset: -5px;
       border-radius: 50%;
       padding: 4px;
       background: conic-gradient(
@@ -349,18 +326,18 @@
       -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
       mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
       animation: rotateJointShine 4s linear infinite;
-      filter: drop-shadow(0 0 10px var(--med-green)) drop-shadow(0 0 15px var(--med-red));
+      filter: drop-shadow(0 0 10px var(--med-green)) drop-shadow(0 0 14px var(--med-red));
       z-index: 2;
     }
 
-    /* The logo image itself with continuous 3D float + medical pulse */
+    /* Logo image with gentle float + pulse */
     .logo-img {
       position: relative;
       width: 130px;
       height: 130px;
       object-fit: contain;
       z-index: 3;
-      filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 15px rgba(0, 230, 118, 0.7));
+      filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 16px rgba(0, 230, 118, 0.8));
       animation: logoFloatPulse 3.2s ease-in-out infinite;
       border-radius: 50%;
     }
@@ -368,7 +345,7 @@
     @keyframes logoEntrance {
       0% {
         opacity: 0;
-        transform: scale(0.25) rotate(-15deg);
+        transform: scale(0.2) rotate(-20deg);
       }
       70% {
         transform: scale(1.12) rotate(4deg);
@@ -382,31 +359,32 @@
     @keyframes logoFloatPulse {
       0%, 100% {
         transform: translateY(0) scale(1);
-        filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 15px rgba(0, 230, 118, 0.7));
+        filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 16px rgba(0, 230, 118, 0.8));
       }
       50% {
-        transform: translateY(-8px) scale(1.04);
-        filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 25px rgba(255, 23, 68, 0.8));
+        transform: translateY(-7px) scale(1.04);
+        filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 24px rgba(255, 23, 68, 0.85));
       }
     }
 
     /* -------------------------------------------------------------
-       OUTLINED TEXT - HIGH VISIBILITY WITH ZERO BACKGROUND
-       Dual -webkit-text-stroke + solid multi-directional drop shadows
+       OUTLINED TEXT - PAINT-ORDER ENSURES STROKE RENDERS OUTSIDE
+       Ultra-crisp letterforms visible over ANY photo background
     ------------------------------------------------------------- */
     .badge-maintenance {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       font-family: 'Orbitron', monospace;
-      font-size: clamp(0.85rem, 1.8vw, 1.15rem);
+      font-size: clamp(0.85rem, 1.8vw, 1.1rem);
       font-weight: 800;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: #ff1744;
-      background: transparent; /* No background */
-      -webkit-text-stroke: 1.2px #000000;
+      background: transparent !important;
+      paint-order: stroke fill;
+      -webkit-text-stroke: 3px #000000;
       text-shadow:
         -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
         -3px  0   0 #000, 3px  0   0 #000,  0  -3px 0 #000, 0   3px 0 #000,
@@ -423,6 +401,7 @@
       border: 2px solid #000;
       animation: blinkDot 1s infinite alternate;
       display: inline-block;
+      flex-shrink: 0;
     }
 
     @keyframes blinkDot {
@@ -433,78 +412,85 @@
     .site-heading {
       font-family: 'Outfit', sans-serif;
       font-weight: 900;
-      font-size: clamp(2.2rem, 5.8vw, 4.2rem);
-      line-height: 1.1;
+      font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+      line-height: 1.05;
       text-transform: uppercase;
       letter-spacing: 2px;
       color: #ffffff;
-      margin-bottom: 6px;
-      background: transparent;
-      -webkit-text-stroke: 1.8px #000000;
+      margin-bottom: 4px;
+      background: transparent !important;
+      paint-order: stroke fill;
+      -webkit-text-stroke: 4px #000000;
       text-shadow:
         -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000,
         -4px  0   0 #000, 4px  0   0 #000,  0  -4px 0 #000, 0   4px 0 #000,
-        0 0 20px var(--med-green-glow),
-        0 0 35px var(--med-green-glow),
+        0 0 22px var(--med-green-glow),
+        0 0 40px var(--med-green-glow),
         0 8px 30px rgba(0, 0, 0, 0.98);
     }
 
     .site-subheading {
       font-family: 'Outfit', sans-serif;
       font-weight: 900;
-      font-size: clamp(1.4rem, 3.5vw, 2.5rem);
-      letter-spacing: 4px;
+      font-size: clamp(1.3rem, 3.2vw, 2.4rem);
+      letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--med-green);
-      margin-bottom: 16px;
-      background: transparent;
-      -webkit-text-stroke: 1.4px #000000;
+      margin-bottom: 14px;
+      background: transparent !important;
+      paint-order: stroke fill;
+      -webkit-text-stroke: 3.5px #000000;
       text-shadow:
         -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
         -3px  0   0 #000, 3px  0   0 #000,  0  -3px 0 #000, 0   3px 0 #000,
-        0 0 20px var(--med-green-glow),
+        0 0 22px var(--med-green-glow),
         0 6px 20px #000000;
     }
 
     .maintenance-message {
       font-family: 'Inter', sans-serif;
-      font-size: clamp(1.05rem, 2vw, 1.35rem);
-      font-weight: 700;
+      font-size: clamp(0.98rem, 1.8vw, 1.25rem);
+      font-weight: 800;
       line-height: 1.5;
-      max-width: 720px;
+      width: 100%;
+      max-width: 680px;
       color: #ffffff;
-      margin: 0 auto 34px auto;
-      background: transparent;
-      -webkit-text-stroke: 1px #000000;
+      margin: 0 auto 30px auto;
+      background: transparent !important;
+      paint-order: stroke fill;
+      -webkit-text-stroke: 2.8px #000000;
       text-shadow:
         -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
         -3px  0   0 #000, 3px  0   0 #000,  0  -3px 0 #000, 0   3px 0 #000,
-        0 0 12px rgba(255, 255, 255, 0.5),
-        0 4px 16px rgba(0, 0, 0, 0.98);
+        0 0 15px rgba(255, 255, 255, 0.6),
+        0 4px 18px rgba(0, 0, 0, 0.98);
     }
 
     /* -------------------------------------------------------------
-       DIGITAL COUNTDOWN TIMER (7 DAYS - AUTO REDUCING)
-       Digital LCD / HUD aesthetic with pure outline visibility
+       DIGITAL COUNTDOWN (7 DAYS - AUTO REDUCING)
+       Orbitron Monospace, zero background, fully responsive
     ------------------------------------------------------------- */
     .countdown-section {
-      margin-bottom: 40px;
-      background: transparent;
+      margin-bottom: 34px;
+      width: 100%;
+      max-width: 680px;
+      background: transparent !important;
     }
 
     .countdown-title {
       font-family: 'Orbitron', monospace;
-      font-size: clamp(0.85rem, 1.6vw, 1.1rem);
+      font-size: clamp(0.85rem, 1.6vw, 1.05rem);
       font-weight: 800;
-      letter-spacing: 4px;
+      letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--med-green);
-      margin-bottom: 18px;
-      background: transparent;
-      -webkit-text-stroke: 1px #000000;
+      margin-bottom: 14px;
+      background: transparent !important;
+      paint-order: stroke fill;
+      -webkit-text-stroke: 2.5px #000000;
       text-shadow:
         -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
-        0 0 15px var(--med-green-glow),
+        0 0 16px var(--med-green-glow),
         0 4px 12px #000000;
     }
 
@@ -512,121 +498,125 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: clamp(10px, 2.5vw, 24px);
-      background: transparent;
+      width: auto;
+      max-width: 100%;
+      gap: clamp(6px, 2vw, 22px);
+      background: transparent !important;
     }
 
     .digital-unit-box {
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-width: clamp(70px, 14vw, 120px);
-      background: transparent; /* No background */
+      min-width: clamp(55px, 12vw, 110px);
+      background: transparent !important;
     }
 
     .digital-number {
       font-family: 'Orbitron', monospace;
-      font-size: clamp(3rem, 7.5vw, 5.2rem);
+      font-size: clamp(2.4rem, 6.5vw, 5rem);
       font-weight: 900;
       line-height: 0.95;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
       color: #ffffff;
-      background: transparent;
-      -webkit-text-stroke: 2px #000000;
+      background: transparent !important;
+      paint-order: stroke fill;
+      -webkit-text-stroke: 4px #000000;
       text-shadow:
         -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000,
         -4px  0   0 #000, 4px  0   0 #000,  0  -4px 0 #000, 0   4px 0 #000,
-        0 0 25px var(--med-green-glow),
+        0 0 24px var(--med-green-glow),
         0 0 45px var(--med-green-glow),
         0 8px 30px #000000;
     }
 
     .digital-colon {
       font-family: 'Orbitron', monospace;
-      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      font-size: clamp(1.8rem, 5vw, 4rem);
       font-weight: 900;
       line-height: 0.95;
       color: var(--med-red);
-      background: transparent;
-      -webkit-text-stroke: 1.8px #000000;
+      background: transparent !important;
+      paint-order: stroke fill;
+      -webkit-text-stroke: 3px #000000;
       text-shadow:
         -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
         0 0 20px var(--med-red-glow),
         0 6px 18px #000000;
       animation: blinkDigitalColon 1s steps(1) infinite;
       align-self: flex-start;
-      margin-top: 5px;
+      margin-top: 4px;
     }
 
     @keyframes blinkDigitalColon {
-      0%, 49% {
-        opacity: 1;
-      }
-      50%, 100% {
-        opacity: 0.2;
-      }
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0.15; }
     }
 
     .digital-unit-label {
       font-family: 'Orbitron', monospace;
-      font-size: clamp(0.7rem, 1.4vw, 0.95rem);
-      font-weight: 800;
-      letter-spacing: 3px;
+      font-size: clamp(0.72rem, 1.3vw, 0.95rem);
+      font-weight: 900;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--med-green);
-      margin-top: 10px;
-      background: transparent;
-      -webkit-text-stroke: 0.8px #000000;
+      color: #ffffff;
+      margin-top: 8px;
+      background: transparent !important;
+      paint-order: stroke fill;
+      -webkit-text-stroke: 2.2px #000000;
       text-shadow:
-        -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000,
-        0 0 10px var(--med-green-glow),
+        -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
+        0 0 12px var(--med-green-glow),
         0 3px 10px #000000;
     }
 
     /* -------------------------------------------------------------
-       CONTACT DETAILS & ACTIONS
-       Outlined neon style with direct interactive click links
+       CONTACT DETAILS & DIRECT ACTIONS
+       Outlined action buttons with glowing borders, NO box backgrounds
     ------------------------------------------------------------- */
     .contact-actions {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      gap: 16px;
-      margin-bottom: 25px;
-      background: transparent;
+      gap: 14px;
+      margin-bottom: 22px;
+      width: 100%;
+      max-width: 800px;
+      background: transparent !important;
     }
 
     .contact-btn {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      padding: 13px 26px;
+      gap: 10px;
+      padding: 12px 24px;
       border-radius: 50px;
       text-decoration: none;
       font-family: 'Inter', sans-serif;
-      font-weight: 800;
-      font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+      font-weight: 900;
+      font-size: clamp(0.92rem, 1.6vw, 1.1rem);
       color: #ffffff;
-      background: transparent; /* No background card */
+      background: transparent !important;
       position: relative;
-      -webkit-text-stroke: 0.8px #000000;
+      paint-order: stroke fill;
+      -webkit-text-stroke: 2.5px #000000;
       text-shadow:
         -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
-        0 0 12px var(--med-green-glow),
-        0 4px 12px #000000;
+        0 0 14px var(--med-green-glow),
+        0 4px 14px #000000;
       transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.3s ease;
       cursor: pointer;
     }
 
-    /* Glowing neon outline border */
+    /* Glowing border frame */
     .contact-btn::before {
       content: '';
       position: absolute;
       inset: 0;
       border-radius: 50px;
       border: 2.5px solid var(--med-green);
-      box-shadow: 0 0 15px var(--med-green-glow), inset 0 0 10px rgba(0, 230, 118, 0.25);
+      box-shadow: 0 0 16px var(--med-green-glow), inset 0 0 10px rgba(0, 230, 118, 0.25);
       transition: all 0.3s ease;
     }
 
@@ -643,14 +633,14 @@
     /* Email button with medical red theme */
     .contact-btn.btn-email::before {
       border-color: var(--med-red);
-      box-shadow: 0 0 15px var(--med-red-glow), inset 0 0 10px rgba(255, 23, 68, 0.25);
+      box-shadow: 0 0 16px var(--med-red-glow), inset 0 0 10px rgba(255, 23, 68, 0.25);
     }
 
     .contact-btn.btn-email {
       text-shadow:
         -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
-        0 0 12px var(--med-red-glow),
-        0 4px 12px #000000;
+        0 0 14px var(--med-red-glow),
+        0 4px 14px #000000;
     }
 
     .contact-btn.btn-email:hover::before {
@@ -658,10 +648,10 @@
       box-shadow: 0 0 25px var(--med-red), 0 0 35px var(--med-red-glow), inset 0 0 15px var(--med-red);
     }
 
-    /* WhatsApp quick action */
+    /* WhatsApp button with WhatsApp green theme */
     .contact-btn.btn-whatsapp::before {
       border-color: #25D366;
-      box-shadow: 0 0 15px rgba(37, 211, 102, 0.7), inset 0 0 10px rgba(37, 211, 102, 0.25);
+      box-shadow: 0 0 16px rgba(37, 211, 102, 0.8), inset 0 0 10px rgba(37, 211, 102, 0.25);
     }
 
     .contact-btn.btn-whatsapp:hover::before {
@@ -670,30 +660,31 @@
     }
 
     .btn-icon {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       fill: currentColor;
       filter: drop-shadow(0 2px 4px #000);
       flex-shrink: 0;
     }
 
-    /* Direct Contact Line underneath */
+    /* Direct Contact Line */
     .direct-contacts-row {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 18px;
       font-family: 'Inter', sans-serif;
-      font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+      font-size: clamp(0.92rem, 1.7vw, 1.15rem);
       font-weight: 800;
       color: #ffffff;
-      background: transparent;
-      -webkit-text-stroke: 0.8px #000000;
+      background: transparent !important;
+      paint-order: stroke fill;
+      -webkit-text-stroke: 2.2px #000000;
       text-shadow:
         -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
-        0 0 12px rgba(0, 230, 118, 0.7),
-        0 4px 12px #000000;
+        0 0 14px rgba(0, 230, 118, 0.8),
+        0 4px 14px #000000;
     }
 
     .contact-inline-item {
@@ -715,21 +706,22 @@
     .contact-separator {
       color: var(--med-red);
       font-weight: 900;
-      text-shadow: 0 0 8px var(--med-red-glow);
+      text-shadow: 0 0 10px var(--med-red-glow);
     }
 
     /* Footer domain branding */
     .footer-brand {
-      margin-top: 30px;
+      margin-top: 26px;
       font-family: 'Orbitron', monospace;
-      font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+      font-size: clamp(0.78rem, 1.4vw, 0.92rem);
       letter-spacing: 3px;
-      color: rgba(255, 255, 255, 0.9);
-      background: transparent;
-      -webkit-text-stroke: 0.6px #000000;
+      color: rgba(255, 255, 255, 0.95);
+      background: transparent !important;
+      paint-order: stroke fill;
+      -webkit-text-stroke: 2px #000000;
       text-shadow:
         -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000,
-        0 0 10px rgba(0, 230, 118, 0.5),
+        0 0 12px rgba(0, 230, 118, 0.6),
         0 2px 8px #000000;
     }
 
@@ -759,29 +751,80 @@
         grid-row: auto;
         grid-column: auto;
       }
+      .beam-v-1, .beam-v-3 {
+        display: none;
+      }
+      .beam-v-2 {
+        left: calc(50vw - 2px);
+      }
+      .site-heading {
+        font-size: clamp(1.8rem, 8vw, 2.8rem);
+      }
+      .site-subheading {
+        font-size: clamp(1.1rem, 4.5vw, 1.6rem);
+        letter-spacing: 2px;
+      }
+      .maintenance-message {
+        font-size: 0.95rem;
+        padding: 0 14px;
+        margin-bottom: 22px;
+        word-break: normal;
+        overflow-wrap: normal;
+        hyphens: none;
+      }
+      .countdown-section {
+        margin-bottom: 24px;
+      }
       .digital-clock-grid {
-        gap: 8px;
+        gap: 3px;
+        width: 100%;
+        max-width: 350px;
       }
       .digital-unit-box {
-        min-width: 60px;
+        min-width: 0;
+        flex: 1 1 0;
+      }
+      .digital-number {
+        font-size: clamp(1.45rem, 6.2vw, 2.1rem);
+        -webkit-text-stroke: 2.2px #000000;
+        letter-spacing: 0px;
       }
       .digital-colon {
-        font-size: 2rem;
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
+        margin-top: 1px;
+        -webkit-text-stroke: 2px #000000;
+      }
+      .digital-unit-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.5px;
+        margin-top: 4px;
+        -webkit-text-stroke: 1.5px #000000;
       }
       .contact-actions {
         flex-direction: column;
         width: 100%;
+        gap: 10px;
       }
       .contact-btn {
         width: 90%;
+        max-width: 320px;
         justify-content: center;
+        padding: 10px 16px;
+        font-size: 0.92rem;
       }
       .direct-contacts-row {
         flex-direction: column;
-        gap: 8px;
+        gap: 6px;
+        font-size: 0.9rem;
       }
       .contact-separator {
         display: none;
+      }
+      .footer-brand {
+        font-size: 0.68rem;
+        letter-spacing: 1px;
+        max-width: 95vw;
+        margin: 20px auto 0 auto;
       }
     }
   </style>
@@ -917,7 +960,7 @@
 
     <!-- Outlined Message -->
     <p class="maintenance-message">
-      We are currently upgrading our digital laboratory portal to bring you faster online test reports, direct doctor consultations, and automated appointment booking.
+      We are upgrading our laboratory systems for faster digital reports, direct doctor consultations, and instant appointment booking.
     </p>
 
     <!-- Digital 7-Day Countdown Timer -->
