@@ -1,0 +1,44 @@
+# Robots.txt for https://mediscandiagnostic.co.in/
+# Mediscan Diagnostic Center - Mathabhanga, Cooch Behar
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /node_modules/
+Disallow: /*.json$
+
+# Major Search Engine Crawlers
+User-agent: Googlebot
+Allow: /
+Allow: /banner*.jpg
+Allow: /banner*.jpeg
+Allow: /uploads/
+
+User-agent: Googlebot-Image
+Allow: /banner*.jpg
+Allow: /banner*.jpeg
+Allow: /uploads/
+Allow: /logo.png
+
+User-agent: Bingbot
+Allow: /
+
+# AI Crawlers & LLMs
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# XML Sitemap Location
+Sitemap: https://mediscandiagnostic.co.in/sitemap.xml
